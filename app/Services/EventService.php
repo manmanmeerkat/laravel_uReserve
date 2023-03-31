@@ -20,6 +20,6 @@ class EventService
     public static function joinDateandTime($date, $time)
     {
         $join = $date. " " .$time;
-        return Carbon::createFromFormat('Y-m-d H:i', $start);
+        return Carbon::createFromFormat('Y-m-d H:i', $join);
     }
 }

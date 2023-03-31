@@ -46,7 +46,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        EventService::checEventDuplication(
+        $check = EventService::checkEventDuplication(
             $request['event_date'],$request['start_time'],$request['end_time']);
 
         
@@ -80,15 +80,17 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $event = Event::findOrFail($event->id);
+        $eventDate = $event->eventDate;
+        $startTime = $event->startTime;
+        $endTime = $event->endTime;
+
+        // dd($eventDate, $startTime, $endTime);
+        return view('manager.events.show',
+        compact('event', 'eventDate', 'startTime', 'endTime'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit(Event $event)
     {
         //
